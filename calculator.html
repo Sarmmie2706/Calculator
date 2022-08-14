@@ -8,39 +8,70 @@
 
     <body>
         <div class="display">
-            <div class="operation"></div>
-            <div class="solution"></div>
+            <div id="operation"></div>
+            <div id="solution"></div>
         </div>
 
         <div class="keys">
             <div class="keyrows">
-                <button>7</button>
-                <button>8</button>
-                <button>9</button>
-                <button>C</button>
+                <button class="number">7</button>
+                <button class="number">8</button>
+                <button class="number">9</button>
+                <button class="clear">C</button>
             </div>
             <div class="keyrows">
-                <button>4</button>
-                <button>5</button>
-                <button>6</button>
-                <button>*</button>
+                <button class="number">4</button>
+                <button class="number">5</button>
+                <button class="number">6</button>
+                <button class="number">*</button>
             </div>
             <div class="keyrows">
-                <button>1</button>
-                <button>2</button>
-                <button>3</button>
-                <button>/</button>
+                <button class="number">1</button>
+                <button class="number">2</button>
+                <button class="number">3</button>
+                <button class="number">/</button>
             </div>
             <div class="keyrows">
-                <button>0</button>
-                <button>+</button>
-                <button>-</button>
+                <button class="number">0</button>
+                <button class="number">+</button>
+                <button class="number">-</button>
                 <button>=</button>
             </div>
         </div>
 
         <script>
+            let add = (a, b) => {
+                console.log ( a + b)
+            };
+            let subtract = (a, b) => {
+                console.log ( a - b)
+            };
+            let multiply = (a, b) => {
+                console.log ( a * b)
+            };
+            let divide = (a, b) => {
+                console.log ( a / b)
+            };
+            let operate = (a, symbol, b) => {
+                add(a, b);
+                subtract(a, b);
+                multiply(a, b);
+                divide(a, b);
+            };
+            const buttons = document.querySelectorAll(".number");
+            buttons.forEach((button) => {
+                button.addEventListener("click", () => {
+                    console.log(button.textContent);
+                    operatePara.textContent += button.textContent;
+                })
+            });
+            const clearer = document.querySelector(".clear");
+            clearer.addEventListener("click", () => operatePara.textContent = " ");
+            let operateDiv = document.getElementById("operation");
+            let operatePara = document.createElement("p");
+            operateDiv.appendChild(operatePara);
             
+
         </script>
     </body>
-</html>
+</html
