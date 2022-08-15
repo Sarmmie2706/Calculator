@@ -35,3 +35,12 @@ html {
     height: 30px;
     width: 30px;
 }
+
+#solution, #operation {
+    height: 40%;
+}
+
+#solution {
+    display: flex;
+    flex-direction: row-reverse;
+}

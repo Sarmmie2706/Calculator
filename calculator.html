@@ -17,7 +17,7 @@
                 <button class="number new-number">7</button>
                 <button class="number new-number">8</button>
                 <button class="number new-number">9</button>
-                <button class="clear">C</button>
+                <button class="clear">AC</button>
             </div>
             <div class="keyrows">
                 <button class="number new-number">4</button>
@@ -41,22 +41,44 @@
 
         <script>
             let add = (a, b) => {
-                console.log ( a + b)
+                let sum = a + b;
+                solutionPara.textContent = sum;
+                
             };
             let subtract = (a, b) => {
-                console.log ( a - b)
+                let difference =  a - b;
+                solutionPara.textContent = difference;
             };
             let multiply = (a, b) => {
-                console.log ( a * b)
+                let product = a * b;
+                solutionPara.textContent = product;
             };
             let divide = (a, b) => {
-                console.log ( a / b)
+                let quotient = a / b;
+                solutionPara.textContent = quotient;
             };
-            let operate = (a, symbol, b) => {
-                add(a, b);
-                subtract(a, b);
-                multiply(a, b);
-                divide(a, b);
+            let operate = (finalString) => {
+                if (finalString.includes("+")) {
+                    let myArray = finalString.split("+");
+                    let a = myArray[0];
+                    let b = myArray[1];
+                    add(+a, +b);
+                } else if (finalString.includes("-")) {
+                    let myArray = finalString.split("-");
+                    let a = myArray[0];
+                    let b = myArray[1];
+                    subtract(+a, +b);
+                } else if (finalString.includes("*")) {
+                    let myArray = finalString.split("*");
+                    let a = myArray[0];
+                    let b = myArray[1];
+                    multiply(+a, +b);
+                } else {
+                    let myArray = finalString.split("/");
+                    let a = myArray[0];
+                    let b = myArray[1];
+                    divide(+a, +b);
+                }    
             };
             const numbBtn = document.querySelectorAll(".number");
             numbBtn.forEach((button) => {
@@ -66,22 +88,34 @@
             });
 
             const clearBtn = document.querySelector(".clear");
-            clearBtn.addEventListener("click", () => operatePara.textContent = " ");
+            clearBtn.addEventListener("click", () => {
+                operatePara.textContent = " ";
+                solutionPara.textContent = 0
+            });
 
-            const operateBtn = document.querySelectorAll(".operator");
-            
+            const operateBtn = document.querySelectorAll(".operator");       
             operateBtn.forEach((button) => {
                 button.addEventListener("click", () => {
                     let symbol = button.textContent;
-                    let x = operatePara.textContent;
-                    operatePara.textContent = "";
-
-                    const equalsBtn = document.querySelector(".equals");
-                    equalsBtn.addEventListener("click", () => {
-                        let y = operatePara.textContent;
-                        let finalString = `${x} ${symbol} ${y}`;
-                        operate();
-                    });
+                    if (solutionPara.textContent != 0) {
+                        let x = solutionPara.textContent; 
+                        operatePara.textContent = "";
+                        const equalsBtn = document.querySelector(".equals");
+                        equalsBtn.addEventListener("click", () => {
+                            let y = operatePara.textContent;
+                            let finalString = `${x}${symbol}${y}`;
+                            operate (finalString);
+                        });
+                    } else {
+                        let x = operatePara.textContent;
+                        operatePara.textContent = "";
+                        const equalsBtn = document.querySelector(".equals");
+                        equalsBtn.addEventListener("click", () => {
+                            let y = operatePara.textContent;
+                            let finalString = `${x}${symbol}${y}`;
+                            operate (finalString);
+                        });
+                    }   
                 });
             });
 
@@ -90,10 +124,7 @@
             operateDiv.appendChild(operatePara);
             let solutionDiv = document.getElementById("solution");
             let solutionPara = document.createElement("p");
-            
-
-            
-
+            solutionDiv.appendChild(solutionPara);
         </script>
     </body>
 </html>
