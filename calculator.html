@@ -14,28 +14,28 @@
 
         <div class="keys">
             <div class="keyrows">
-                <button class="number">7</button>
-                <button class="number">8</button>
-                <button class="number">9</button>
+                <button class="number new-number">7</button>
+                <button class="number new-number">8</button>
+                <button class="number new-number">9</button>
                 <button class="clear">C</button>
             </div>
             <div class="keyrows">
-                <button class="number">4</button>
-                <button class="number">5</button>
-                <button class="number">6</button>
-                <button class="number">*</button>
+                <button class="number new-number">4</button>
+                <button class="number new-number">5</button>
+                <button class="number new-number">6</button>
+                <button class="operator">*</button>
             </div>
             <div class="keyrows">
-                <button class="number">1</button>
-                <button class="number">2</button>
-                <button class="number">3</button>
-                <button class="number">/</button>
+                <button class="number new-number">1</button>
+                <button class="number new-number">2</button>
+                <button class="number new-number">3</button>
+                <button class="operator">/</button>
             </div>
             <div class="keyrows">
-                <button class="number">0</button>
-                <button class="number">+</button>
-                <button class="number">-</button>
-                <button>=</button>
+                <button class="number new-number">0</button>
+                <button class="operator">+</button>
+                <button class="operator">-</button>
+                <button class="equals">=</button>
             </div>
         </div>
 
@@ -58,20 +58,42 @@
                 multiply(a, b);
                 divide(a, b);
             };
-            const buttons = document.querySelectorAll(".number");
-            buttons.forEach((button) => {
+            const numbBtn = document.querySelectorAll(".number");
+            numbBtn.forEach((button) => {
                 button.addEventListener("click", () => {
-                    console.log(button.textContent);
                     operatePara.textContent += button.textContent;
                 })
             });
-            const clearer = document.querySelector(".clear");
-            clearer.addEventListener("click", () => operatePara.textContent = " ");
+
+            const clearBtn = document.querySelector(".clear");
+            clearBtn.addEventListener("click", () => operatePara.textContent = " ");
+
+            const operateBtn = document.querySelectorAll(".operator");
+            
+            operateBtn.forEach((button) => {
+                button.addEventListener("click", () => {
+                    let symbol = button.textContent;
+                    let x = operatePara.textContent;
+                    operatePara.textContent = "";
+
+                    const equalsBtn = document.querySelector(".equals");
+                    equalsBtn.addEventListener("click", () => {
+                        let y = operatePara.textContent;
+                        let finalString = `${x} ${symbol} ${y}`;
+                        operate();
+                    });
+                });
+            });
+
             let operateDiv = document.getElementById("operation");
             let operatePara = document.createElement("p");
             operateDiv.appendChild(operatePara);
+            let solutionDiv = document.getElementById("solution");
+            let solutionPara = document.createElement("p");
+            
+
             
 
         </script>
     </body>
-</html
+</html>
